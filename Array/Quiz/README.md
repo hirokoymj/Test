@@ -389,6 +389,9 @@ const mergeObjects = (a, b) => {
 };
 ```
 
+- _concat_ function is for Array, not for Object.
+- [Array.concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
+
 <hr />
 
 **Q11:**
@@ -430,7 +433,7 @@ const a2 = [1, 2, 3, 29];
 // expected result =[1,2,3,5,6,9,29]
 ```
 
-**Q12-Answer:**
+**Q12-Answer-1:**
 
 ```js
 const merged = a1.concat(a2);
@@ -446,15 +449,32 @@ const result = merged
 **Q12-Answer-2:**
 
 ```js
+const a3 = [...a1, ...a2];
 const output = [];
-const data = [...a1, ...a2];
-
-data.forEach((d) => {
-  const found = output.find((value) => value === d);
-  if (!found) output.push(d);
+console.log(a3);
+const result = a3.map((value) => {
+  const found = output.find((d) => d === value);
+  if (!found) output.push(value);
 });
-output.sort((a, b) => (a < b ? -1 : 1));
+
+console.log(result);
+// [
+//   undefined,
+//   undefined,
+//   undefined,
+//   undefined,
+//   undefined,
+//   undefined,
+//   undefined,
+//   undefined,
+// ];
+console.log(output);
+// [2, 5, 6, 9, 1, 3, 29];
 ```
+
+- []()
+- The map() method is an iterative method for each element in an array.
+- Constructs a new array from the results against an each element.
 
 <hr />
 
@@ -1289,6 +1309,26 @@ console.log("different items: ", output1);
 ```
 
 <hr />
+
+**Q46:**
+
+- Overwrites objects.
+- What is the output of combinedSettings?
+
+```js
+const defaults = { color: "red", size: "medium" };
+const userSettings = { color: "blue" };
+const combinedSettings = { ...defaults, ...userSettings };
+```
+
+**Q46-Answer:**
+
+- the spread operator overwrites the values in the target object.
+
+```js
+console.log(combinedSettings);
+// Output: { color: 'blue', size: 'medium' }
+```
 
 <!--
 **Q1:**
